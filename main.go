@@ -9,13 +9,6 @@ import (
 func main() {
 	db.Init("test.sqlite3")
 	defer db.Close()
-	sql := `
-		CREATE TABLE IF NOT EXISTS tasks(
-			title STRING,
-			done INTEGER
-		)
-	`
-	db.GetDB().Exec(sql)
 
 	router.Router(db.GetDB())
 }
