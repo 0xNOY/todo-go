@@ -10,7 +10,7 @@ import (
 	"github.com/naoya0x00/todo-go/models"
 )
 
-func Router(db *sql.DB) {
+func Start(db *sql.DB) {
 	if len(os.Args) < 2 {
 		fmt.Println("need subcommands")
 		return

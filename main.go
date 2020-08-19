@@ -10,5 +10,5 @@ func main() {
 	db.Init("todo-go.sqlite3")
 	defer db.Close()
 
-	router.Router(db.GetDB())
+	router.Start(db.GetDB())
 }
