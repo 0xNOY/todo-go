@@ -4,31 +4,39 @@ import (
 	"flag"
 	"fmt"
 	"os"
-
-	"github.com/naoya0x00/todo-go/controllers"
 )
 
-func Start(taskHandler *controllers.TaskHandler) {
-	if len(os.Args) < 2 {
-		fmt.Println("need subcommands")
-		return
+type Command struct {
+	Name        string
+	Function    func(*flag.FlagSet)
+	Description string
+	FlagSet     *flag.FlagSet
+}
+
+type Router struct {
+	Commands []Command
+}
+
+func (r *Router) Start() {
+	if len(os.Args) > 1 {
+		for _, command := range r.Commands {
+			if command.Name == os.Args[1] {
+				command.Function(command.FlagSet)
+				return
+			}
+		}
 	}
 
-	switch os.Args[1] {
-	case "add":
-		cmd := flag.NewFlagSet("add", flag.ExitOnError)
-		taskHandler.Add(cmd)
-
-	case "del":
-		cmd := flag.NewFlagSet("del", flag.ExitOnError)
-		taskHandler.Delete(cmd)
-
-	case "list":
-		cmd := flag.NewFlagSet("list", flag.ExitOnError)
-		taskHandler.Show(cmd)
-
-	case "check":
-		cmd := flag.NewFlagSet("check", flag.ExitOnError)
-		taskHandler.UpdateDone(cmd)
+	for _, command := range r.Commands {
+		fmt.Println(command.Name, command.Description)
 	}
+}
+
+func (r *Router) AddCommand(name string, description string, function func(*flag.FlagSet)) {
+	r.Commands = append(r.Commands, Command{
+		Name:        name,
+		Function:    function,
+		Description: description,
+		FlagSet:     flag.NewFlagSet(name, flag.ExitOnError),
+	})
 }

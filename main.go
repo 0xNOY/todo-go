@@ -19,5 +19,5 @@ func main() {
 	}
 	taskHandler.TaskModel.Init()
 
-	router.Start(&taskHandler)
+	router.Route(&taskHandler)
 }
