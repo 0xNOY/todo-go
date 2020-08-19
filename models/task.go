@@ -2,8 +2,6 @@ package models
 
 import (
 	"database/sql"
-
-	"github.com/naoya0x00/todo-go/forms"
 )
 
 type Task struct {
@@ -26,9 +24,9 @@ func (m *TaskModel) Init() {
 	m.DB.Exec(sql)
 }
 
-func (m *TaskModel) Add(form forms.TaskForm) {
+func (m *TaskModel) Add(title string) {
 	sql := "INSERT INTO tasks (title, done) VALUES (?, ?)"
-	m.DB.Exec(sql, form.Title, form.Done)
+	m.DB.Exec(sql, title, false)
 }
 
 func (m *TaskModel) All() (tasks []Task) {
