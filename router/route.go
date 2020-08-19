@@ -9,7 +9,7 @@ func Route(taskHandler *controllers.TaskHandler) {
 
 	router.AddCommand("ad", "<taskTitle: string> | add task", taskHandler.Add)
 	router.AddCommand("rm", "<taskID: int> | delete task", taskHandler.Delete)
-	router.AddCommand("sl", "list task", taskHandler.Show)
+	router.AddCommand("st", "| show tasks", taskHandler.Show)
 	router.AddCommand("ck", "<taskID: int> | complete task", taskHandler.UpdateDone)
 
 	router.Start()
