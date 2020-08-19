@@ -1,26 +1,17 @@
 package router
 
 import (
-	"database/sql"
 	"flag"
 	"fmt"
 	"os"
 
 	"github.com/naoya0x00/todo-go/controllers"
-	"github.com/naoya0x00/todo-go/models"
 )
 
-func Start(db *sql.DB) {
+func Start(taskHandler *controllers.TaskHandler) {
 	if len(os.Args) < 2 {
 		fmt.Println("need subcommands")
 		return
-	}
-
-	taskModel := models.TaskModel{
-		DB: db,
-	}
-	taskHandler := controllers.TaskHandler{
-		TaskModel: &taskModel,
 	}
 
 	switch os.Args[1] {
