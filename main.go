@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	db.Init("test.sqlite3")
+	db.Init("todo-go.sqlite3")
 	defer db.Close()
 
 	router.Router(db.GetDB())
