@@ -17,6 +17,7 @@ func main() {
 			DB: db.GetDB(),
 		},
 	}
+	taskHandler.TaskModel.Init()
 
 	router.Start(&taskHandler)
 }

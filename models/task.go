@@ -16,6 +16,16 @@ type TaskModel struct {
 	DB *sql.DB
 }
 
+func (m *TaskModel) Init() {
+	sql := `
+		CREATE TABLE IF NOT EXISTS tasks(
+			title STRING,
+			done INTEGER
+		)
+	`
+	m.DB.Exec(sql)
+}
+
 func (m *TaskModel) Add(form forms.TaskForm) {
 	sql := "INSERT INTO tasks (title, done) VALUES (?, ?)"
 	m.DB.Exec(sql, form.Title, form.Done)
