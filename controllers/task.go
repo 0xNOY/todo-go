@@ -8,7 +8,6 @@ import (
 
 	"github.com/olekukonko/tablewriter"
 
-	"github.com/naoya0x00/todo-go/forms"
 	"github.com/naoya0x00/todo-go/models"
 )
 
@@ -20,7 +19,7 @@ func (h *TaskHandler) Add(cmd *flag.FlagSet) {
 	cmd.Parse(os.Args[2:])
 
 	for _, title := range cmd.Args() {
-		h.TaskModel.Add(forms.TaskForm{Title: title})
+		h.TaskModel.Add(title)
 	}
 	fmt.Println("added")
 }
